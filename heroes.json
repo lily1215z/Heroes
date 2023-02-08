@@ -1,0 +1,47 @@
+{
+  "heroes": [
+    {
+      "id": 1,
+      "name": "Первый герой",
+      "description": "Первый герой в рейтинге!",
+      "element": "fire"
+    },
+    {
+      "id": 2,
+      "name": "Неизвестный герой",
+      "description": "Скрывающийся в тени",
+      "element": "wind"
+    },
+    {
+      "id": 3,
+      "name": "Морской герой",
+      "description": "Как аквамен, но не из DC",
+      "element": "water"
+    },
+    {
+      "name": "Светлана Лилу",
+      "description": "The best",
+      "element": "wind",
+      "id": "90406dc0-a7c9-11ed-8fd7-ed5e5d95048f"
+    },
+    {
+      "name": "Javi",
+      "description": "love",
+      "element": "water",
+      "id": "b98b90b0-a7c9-11ed-90bd-3942bbd5ec52"
+    },
+    {
+      "name": "Светлана Лилу",
+      "description": "123",
+      "element": "fire",
+      "id": "fab822b0-a7c9-11ed-ba7f-b17716c0dc42"
+    }
+  ],
+  "filters": [
+    "all",
+    "fire",
+    "water",
+    "wind",
+    "earth"
+  ]
+}
