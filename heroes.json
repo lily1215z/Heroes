@@ -25,23 +25,49 @@
       "id": "90406dc0-a7c9-11ed-8fd7-ed5e5d95048f"
     },
     {
-      "name": "Javi",
-      "description": "love",
-      "element": "water",
-      "id": "b98b90b0-a7c9-11ed-90bd-3942bbd5ec52"
-    },
-    {
       "name": "Светлана Лилу",
       "description": "123",
       "element": "fire",
       "id": "fab822b0-a7c9-11ed-ba7f-b17716c0dc42"
+    },
+    {
+      "name": "Lana",
+      "description": "I want be",
+      "element": "water",
+      "id": "caeab4c0-a95f-11ed-8586-05d530be00a4"
+    },
+    {
+      "name": "Светлана",
+      "description": "78",
+      "element": "earth",
+      "id": "d47ca840-a95f-11ed-8586-05d530be00a4"
     }
   ],
   "filters": [
-    "all",
-    "fire",
-    "water",
-    "wind",
-    "earth"
+    {
+      "name": "all",
+      "className": "btn btn-outline-dark active",
+      "label": "All"
+    },
+    {
+      "name": "fire",
+      "className": "btn btn-danger",
+      "label": "Fire"
+    },
+    {
+      "name": "water",
+      "className": "btn btn-primary",
+      "label": "Water"
+    },
+    {
+      "name": "wind",
+      "className": "btn btn-success",
+      "label": "Wind"
+    },
+    {
+      "name": "earth",
+      "className": "btn btn-secondary",
+      "label": "Earth"
+    }
   ]
 }

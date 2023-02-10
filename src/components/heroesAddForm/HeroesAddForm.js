@@ -1,6 +1,6 @@
 import {v1} from 'uuid'
-import {heroAdd, heroesFetched, heroesFetchingError} from "../../actions";
-import {useDispatch} from "react-redux";
+import {heroAdd, heroesFetchingError} from "../../actions";
+import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {useHttp} from "../../hooks/http.hook";
 
@@ -16,10 +16,15 @@ import {useHttp} from "../../hooks/http.hook";
 
 const HeroesAddForm = () => {
     const dispatch = useDispatch()
+    const {request} = useHttp();
+
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [element, setElement] = useState('')
-    const {request} = useHttp();
+
+    const filters = useSelector(state => state.filters)
+    const filtersLoading = useSelector(state => state.filterLoading)
+
 
     const heroAddHandler = (e) => {
         e.preventDefault();
@@ -39,6 +44,22 @@ const HeroesAddForm = () => {
         setElement('')
     }
 
+    const renderFilters = (filters, status) => {
+        if(status === 'loading') {
+            return <option>Loader elements</option>
+        } else if (status === 'error') {
+            return <option>error loading</option>
+        }
+
+        if(filters && filters.length > 0) {
+            return filters.map(({name, label}) => {
+                //один из фильтров нам тут не нужен
+                if(name === 'all') return
+
+                return <option key={name} value={name}>{label}</option>
+            })
+        }
+    }
 
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={heroAddHandler}>
@@ -71,18 +92,16 @@ const HeroesAddForm = () => {
 
             <div className="mb-3">
                 <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
-                <select 
+
+                <select
                     required
-                    className="form-select" 
+                    className="form-select"
                     id="element"
                     value={element}
                     onChange={e=>setElement(e.currentTarget.value)}
                     name="element">
                     <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    {renderFilters(filters, filtersLoading)}
                 </select>
             </div>
 

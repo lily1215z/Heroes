@@ -27,3 +27,13 @@ export const heroDelete = (id) => {
         type: 'HEROES_DELETE', payload: id
     }
 }
+
+export const filtersFetched = (filters) => {
+    return {type: 'FILTER_FETCHED', payload: filters}
+}
+export const filterFetchingLoading = (loading) => {
+    return {type: 'FILTER_LOADING', payload: loading}
+}
+export const activeFilterChanged = (activeFilter) => {
+    return {type: 'ACTIVE_FILTER_CHANGED', payload: activeFilter}
+}
