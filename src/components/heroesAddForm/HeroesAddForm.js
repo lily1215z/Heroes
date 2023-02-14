@@ -1,8 +1,8 @@
 import {v1} from 'uuid'
-import {heroAdd, heroesFetchingError} from "../../actions";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {useHttp} from "../../hooks/http.hook";
+import {heroAdd, heroesFetchingError} from "../heroesList/HeroesSlice";
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -22,8 +22,8 @@ const HeroesAddForm = () => {
     const [description, setDescription] = useState('')
     const [element, setElement] = useState('')
 
-    const filters = useSelector(state => state.filters)
-    const filtersLoading = useSelector(state => state.filterLoading)
+    const filters = useSelector(state => state.filters.filters)
+    const filtersLoading = useSelector(state => state.filters.filterLoading)
 
 
     const heroAddHandler = (e) => {
@@ -45,16 +45,18 @@ const HeroesAddForm = () => {
     }
 
     const renderFilters = (filters, status) => {
-        if(status === 'loading') {
+        if (status === 'loading') {
             return <option>Loader elements</option>
         } else if (status === 'error') {
             return <option>error loading</option>
         }
 
-        if(filters && filters.length > 0) {
+        console.log(filters)
+
+        if (filters && filters.length > 0) {
             return filters.map(({name, label}) => {
                 //один из фильтров нам тут не нужен
-                if(name === 'all') return
+                if (name === 'all') return
 
                 return <option key={name} value={name}>{label}</option>
             })
@@ -68,12 +70,12 @@ const HeroesAddForm = () => {
                 <input
                     value={name}
                     required
-                    type="text" 
-                    name="name" 
-                    className="form-control" 
-                    id="name" 
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    id="name"
                     placeholder="Как меня зовут?"
-                    onChange={e=> setName(e.currentTarget.value)}
+                    onChange={e => setName(e.currentTarget.value)}
                 />
             </div>
 
@@ -82,11 +84,11 @@ const HeroesAddForm = () => {
                 <textarea
                     required
                     value={description}
-                    name="text" 
-                    className="form-control" 
-                    id="text" 
+                    name="text"
+                    className="form-control"
+                    id="text"
                     placeholder="Что я умею?"
-                    onChange={e=>setDescription(e.currentTarget.value)}
+                    onChange={e => setDescription(e.currentTarget.value)}
                     style={{"height": '130px'}}/>
             </div>
 
@@ -98,9 +100,9 @@ const HeroesAddForm = () => {
                     className="form-select"
                     id="element"
                     value={element}
-                    onChange={e=>setElement(e.currentTarget.value)}
+                    onChange={e => setElement(e.currentTarget.value)}
                     name="element">
-                    <option >Я владею элементом...</option>
+                    <option>Я владею элементом...</option>
                     {renderFilters(filters, filtersLoading)}
                 </select>
             </div>

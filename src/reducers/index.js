@@ -4,10 +4,10 @@ const initialState = {
     filters: [],
     filterLoading: 'idle',
     activeFilterChanged: 'all',
-    filteredHeroes: []
+    // filteredHeroes: []
 }
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'HEROES_FETCHING':
             return {
@@ -18,7 +18,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 heroes: action.payload,
-                filteredHeroes: state.activeFilterChanged === 'all' ? action.payload : action.payload.filter(i=>i.element === state.activeFilterChanged),
                 heroesLoadingStatus: 'idle'
             }
         case 'HEROES_FETCHING_ERROR':
@@ -55,5 +54,3 @@ const reducer = (state = initialState, action) => {
             return state
     }
 }
-
-export default reducer;

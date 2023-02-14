@@ -6,24 +6,20 @@
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 import {useEffect} from "react";
-import {activeFilterChanged, filterFetchingLoading, filtersFetched} from "../../actions";
 import {useDispatch, useSelector} from "react-redux";
-import {useHttp} from "../../hooks/http.hook";
 import classNames from "classnames";
+import {activeFilterChanged, fetchFilters} from "./FilterSlice";
 
 const HeroesFilters = () => {
     const dispatch = useDispatch()
-    const {request} = useHttp();
-    const filters = useSelector(state => state.filters)
-    const filtersLoading = useSelector(state => state.filterLoading)
-    const filtersActive = useSelector(state => state.activeFilterChanged)
+    const filters = useSelector(state => state.filters.filters)
+    const filtersLoading = useSelector(state => state.filters.filterLoading)
+    const filtersActive = useSelector(state => state.filters.activeFilterChanged)
+    // action.payload === 'all' ? state.heroes : state.heroes.filter(i=>i.element === action.payload)
 
     useEffect(() => {
-        dispatch(filterFetchingLoading('loading'));
-        request("http://localhost:3001/filters")
-            .then(data => dispatch(filtersFetched(data)))
-        // .catch(() => dispatch(filterFetchingLoading()))
-        dispatch(filterFetchingLoading('idle'));
+        dispatch(fetchFilters())
+
         // eslint-disable-next-line
     }, []);
 
