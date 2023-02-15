@@ -1,15 +1,19 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createEntityAdapter, createSlice} from '@reduxjs/toolkit';
 import {useHttp} from '../../hooks/http.hook';
 
-
-const initialState = {
-    filters: [],
+const filterAdapter = createEntityAdapter();
+// const initialState = {
+//     filters: [],
+//     filterLoading: 'idle',
+//     activeFilterChanged: 'all',
+// }
+const initialState = filterAdapter.getInitialState({
     filterLoading: 'idle',
     activeFilterChanged: 'all',
-}
-export const fetchFilters  = createAsyncThunk('filter/fetchFilters', async()=> {
+})
+export const fetchFilters = createAsyncThunk('filter/fetchFilters', async () => {
     const {request} = useHttp();
-   return await request("http://localhost:3001/filters")
+    return await request('http://localhost:3001/filters')
 })
 
 const FilterSlice = createSlice({
@@ -28,14 +32,22 @@ const FilterSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchFilters.pending, state => {state.filterLoading = 'loading'})
+            .addCase(fetchFilters.pending, state => {
+                state.filterLoading = 'loading'
+            })
             .addCase(fetchFilters.fulfilled, (state, action) => {
                 state.filterLoading = 'idle'
-                state.filters = action.payload
+                // state.filters = action.payload
+                filterAdapter.setAll(state, action.payload)
             })
-            .addDefaultCase(() => {})
+            .addDefaultCase(() => {
+            })
     }
 })
 
 export const FilterReducer = FilterSlice.reducer
+
+
+export const {selectAll} = filterAdapter.getSelectors(state => state.filters)
+
 export const {activeFilterChanged} = FilterSlice.actions

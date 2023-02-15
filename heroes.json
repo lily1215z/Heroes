@@ -33,26 +33,31 @@
   ],
   "filters": [
     {
+      "id": "all",
       "name": "all",
       "className": "btn btn-outline-dark active",
       "label": "All"
     },
     {
+      "id": "fire",
       "name": "fire",
       "className": "btn btn-danger",
       "label": "Fire"
     },
     {
+      "id": "water",
       "name": "water",
       "className": "btn btn-primary",
       "label": "Water"
     },
     {
+      "id": "wind",
       "name": "wind",
       "className": "btn btn-success",
       "label": "Wind"
     },
     {
+      "id": "earth",
       "name": "earth",
       "className": "btn btn-secondary",
       "label": "Earth"

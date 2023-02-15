@@ -8,13 +8,15 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import classNames from "classnames";
-import {activeFilterChanged, fetchFilters} from "./FilterSlice";
+import {activeFilterChanged, fetchFilters, selectAll} from "./FilterSlice";
+import {store} from "../../store";
 
 const HeroesFilters = () => {
     const dispatch = useDispatch()
-    const filters = useSelector(state => state.filters.filters)
+    // const filters = useSelector(state => state.filters.filters)
     const filtersLoading = useSelector(state => state.filters.filterLoading)
     const filtersActive = useSelector(state => state.filters.activeFilterChanged)
+    const filters = selectAll(store.getState())
     // action.payload === 'all' ? state.heroes : state.heroes.filter(i=>i.element === action.payload)
 
     useEffect(() => {
@@ -42,7 +44,7 @@ const HeroesFilters = () => {
             return <button key={name}
                            id={name}
                            className={btnClass}
-                           onClick={()=> dispatch(activeFilterChanged(name))}
+                           onClick={() => dispatch(activeFilterChanged(name))}
             >{label}</button>
         })
     }
